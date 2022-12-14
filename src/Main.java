@@ -1,3 +1,4 @@
+import java.util.*;
 public class Main {
     /*
         Use the following methods:
@@ -14,8 +15,8 @@ public class Main {
         System.out.println(VowelRemover("Remove all of the vowels."));
         System.out.println("Correct output: Rmv ll f th vwls");
         
-        System.out.println(ContainsSubstring("Sentence","ten"));
-        System.out.println("\nCorrect output: true");
+        System.out.println("\n" + ContainsSubstring("Sentence","ten"));
+        System.out.println("Correct output: true");
         
         System.out.println(ReverseString("ABCDEF"));
         System.out.println("Correct output: FEDCBA");
@@ -63,18 +64,12 @@ public class Main {
      * @return true if target found, false otherwise
      */
     public static boolean ContainsSubstring(String input, String target){
-        for (int i = 0; i < input.length(); i++) {
-            try
+        for (int i = 0; i <= input.length() - target.length(); i++)
+        {
+            String newString = input.substring(i, i + target.length());
+            if (newString.equals(target))
             {
-                String newString = input.substring(i, target.length() + 1);
-                if (newString.equals(target))
-                {
-                    return true;
-                }
-            }
-            catch (Exception a)
-            {
-                return false;
+                return true;
             }
         }
         return false;
@@ -86,8 +81,16 @@ public class Main {
      * @return reversed input String
      */
     public static String ReverseString(String input){
+        char[] characters = new char[input.length()];
+        int counter = 0;
+        for (int i = input.length() - 1; i >= 0; i--)
+        {
+            characters[counter] = input.charAt(i);
+            counter++;
 
-        return "";
+        }
+
+        return charArrayToString(characters);
     }
 
     /**
@@ -97,6 +100,12 @@ public class Main {
      */
     public static boolean PalindromeChecker(String input){
 
-        return false;
+        return input.equals(ReverseString(input));
+    }
+
+    public static String charArrayToString(char[] array)
+    {
+        String newString = new String(array);
+        return newString;
     }
 }
